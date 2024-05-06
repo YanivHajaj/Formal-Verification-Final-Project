@@ -23,7 +23,7 @@ def createSMVfile(board):
     VAR
         board : array 0..{n - 1} of array 0..{m - 1} of {{WarehouseKeeper, KeeperOnGoal, Box, BoxOnGoal, Wall, Goal, Floor}};
         move : {{l, u, r, d}};
-    
+
     ASSIGN 
     '''
 
@@ -171,7 +171,7 @@ def createSMVfile(board):
 
 
 def run_nuxmv(model_filename, engine=None, k=None):
-    timer1=time.time()
+    timer1 = time.time()
     # Run the command
     os.chdir(r'C:\Users\yaniv\OneDrive - Bar-Ilan University\Desktop\nuXmv-2.0.0-win64\bin')
     # Define the base command
@@ -208,8 +208,11 @@ def run_nuxmv(model_filename, engine=None, k=None):
     with open(output_filename, "w") as f:
         f.write(stdout)
     print(f"Output saved to {output_filename}")
-    timer2=time.time()
-    print(f"Performance of the {engine} run: {timer2 - timer1}")
+    timer2 = time.time()
+    if engine is not None:
+        print(f"Performance of the {engine} run: {timer2 - timer1} seconds")
+    else:
+        print(f"Performance of the regular run: {timer2 - timer1} seconds")
     return [output_filename, timer2 - timer1]
 
 
@@ -254,7 +257,7 @@ def iterative_solving(board):
     # Initialize an empty list to store the locations of the goals
     goals = []
     solution = []
-    totaltime= 0
+    totaltime = 0
     for x, row in enumerate(board):
         for y, cell in enumerate(row):
             # If the cell is a goal, add its location to the list
@@ -272,7 +275,7 @@ def iterative_solving(board):
     index = 1
     for goal in goals:
         print(f"iteration number {index} ")
-        index = index +1
+        index = index + 1
         # add one goal
         if board[goal[0]][goal[1]] == '@':
             board[goal[0]][goal[1]] = '+'
@@ -300,7 +303,8 @@ def iterative_solving(board):
                 symbol = state_to_symbol.get(state, '')  # Get the symbol corresponding to the state
                 board[int(i)][int(j)] = symbol
 
-    print(f"\n\nthe final solution is: {solution} \ntotal number of iterations is {index-1} \ntotal time for a given board is {totaltime}")
+    print(
+        f"\n\nthe final solution is: {solution} \ntotal number of iterations is {index - 1} \ntotal time for a given board is {totaltime}")
 
 
 if __name__ == "__main__":
@@ -345,8 +349,6 @@ if __name__ == "__main__":
     run_nuxmv("sokoban.smv", "SAT", k)
     print_solution("sokobanSAT.out", "SAT")
     print("\n\n")
-
-
 
     print("***************************** Iteration Mode ******************************")
     iterative_solving(board)
