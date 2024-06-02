@@ -1,6 +1,11 @@
 # Formal-Verification-Final-Project
 Formal Verification Project - This project implements a solver for the Sokoban puzzle using Formal Methods. It generates SMV models with Python, checks them using nuXmv, and evaluates BDD and SAT Solver performance. The solution includes iterative approaches for complex boards. All code, boards, models, and a report are included.
 
+
+Explanation_PDF about the code:
+https://github.com/YanivHajaj/Formal-Verification-Final-Project/blob/main/Explanation_PDF_Formal_Verification_Final_Project.pdf
+
+
 ## Usage
 This project includes several functions. Here's a breakdown of each one:  
 **•	print_board(board):**  
